@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="bootstrap.css">
+    <script src="bootstrap.js"></script>
+    <script src="jquery36.js"></script>
+    <script src="popper.js"></script>
+
+</head>
+<body>
+
+<form class="p-3 m-3 col-6" action="process.php" method="post" id="editForm">
+    <div class="form-group">
+        <label for="inputValue">Text: </label>
+        <input class="form-control" id="inputValue" rows="3" placeholder="Type a sentence here"></input>
+    </div>
+    <button id="print" type="submit" class="btn btn-primary mb-2">print</button>
+    <button id="bold" type="submit" class="btn btn-info mb-2"><b>b</b></button>
+    <button id="italic" type="submit" class="btn btn-secondary mb-2"><i>i</i></button>
+    <button id="lowercase" type="submit" class="btn btn-success mb-2">aaa</button>
+    <button id="uppercase" type="submit" class="btn btn-danger mb-2">AAA</button>
+    <button id="capital" type="submit" class="btn btn-light mb-2">Aaa Aaa</button>
+    <button id="countWords" type="submit" class="btn btn-dark mb-2">count words</button>
+    <button  id="splitWords"  type="submit" class="btn btn-link mb-2">split words</button>
+
+
+    <div id="showText"></div>
+</form>
+
+<script>
+
+$('.btn').click(function(event){
+    event.preventDefault();
+    var operand = $(this).attr('id');
+    $('#showText').html('<img width="20%" src="wait.gif">');
+    $.ajax({
+        type: $('#editForm').attr('method'),
+        url: $('#editForm').attr('action'),
+        data: {text:$('#inputValue').val(), op:operand},
+        success: function(response) {
+            $('#showText').html(response)
+            console.log(response);
+        }
+    })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*document.getElementById('print').addEventListener('click', function(e){
+        e.preventDefault();
+        var inputValue = document.getElementById('inputValue').value;
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", 'process.php', true);
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                console.log(xhr.responseText);
+                document.getElementById("showText").innerHTML = xhr.responseText;
+            }
+        };
+
+        xhr.send('{"name":"yogesh","salary":35000}');
+
+    });*/
+
+
+    /*function printButton(){
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(xhr.responseText);
+                document.getElementById("showText").innerHTML = this.responseText;
+            }
+        };
+        xhr.open("POST", "process.php", true);
+        xhr.send();
+        return false;
+    }*/
+
+</script>
+
+
+</body>
+</html>
