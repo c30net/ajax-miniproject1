@@ -35,60 +35,19 @@ $('.btn').click(function(event){
     event.preventDefault();
     var operand = $(this).attr('id');
     $('#showText').html('<img width="20%" src="wait.gif">');
-    $.ajax({
-        type: $('#editForm').attr('method'),
-        url: $('#editForm').attr('action'),
-        data: {text:$('#inputValue').val(), op:operand},
-        success: function(response) {
-            $('#showText').html(response)
-            console.log(response);
-        }
-    })
+    setTimeout(function(){
+        $.ajax({
+            type: $('#editForm').attr('method'),
+            url: $('#editForm').attr('action'),
+            data: {text:$('#inputValue').val(), op:operand},
+            success: function(response) {
+                $('#showText').html(response)
+            }
+        })
+    }, 500)
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-    /*document.getElementById('print').addEventListener('click', function(e){
-        e.preventDefault();
-        var inputValue = document.getElementById('inputValue').value;
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", 'process.php', true);
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                console.log(xhr.responseText);
-                document.getElementById("showText").innerHTML = xhr.responseText;
-            }
-        };
-
-        xhr.send('{"name":"yogesh","salary":35000}');
-
-    });*/
-
-
-    /*function printButton(){
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log(xhr.responseText);
-                document.getElementById("showText").innerHTML = this.responseText;
-            }
-        };
-        xhr.open("POST", "process.php", true);
-        xhr.send();
-        return false;
-    }*/
 
 </script>
 
